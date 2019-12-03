@@ -22,9 +22,9 @@ const urlsRouter = require('./routes/urls');
 
 app.use('/urls', urlsRouter);
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//     res.send('Hello World!');
+// });
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
