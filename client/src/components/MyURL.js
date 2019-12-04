@@ -22,33 +22,33 @@ const MyURL = () => {
         getURLS();
     }, []);
 
-    const getURLS = async () => {
-        // axios.get('http://localhost:3000/urls/')
-        // .then( res => {
-        //     setUrl(res.data);
-        //     console.log(res.data);
-        //     console.log(url);
-        // })
-        // .catch( err => {
-        //     console.log(err);
-        // });
-        const response = await fetch('http://localhost:3000/urls/');
-        const data = await response.json();
-        setUrl(data);
-        console.log(url, data);
+    const getURLS =  () => {
+        axios.get('http://localhost:3000/urls/')
+        .then( res => {
+            setUrl(res.data);
+            console.log(res.data);
+            console.log(url);
+        })
+        .catch( err => {
+            console.log(err);
+        });
+        // const response = await fetch('http://localhost:3000/urls/');
+        // const data = await response.json();
+        // setUrl(data);
+        // console.log(url, data);
     }
 
-    const deleteUrl = async (id) => {
-        // axios.delete('http://localhost:3000/urls/' + id)
-        //     .then( res => console.log(res.data));
-        // setUrl( url.filter( elem => elem._id !== id));
+    const deleteUrl =  (id) => {
+        axios.delete('http://localhost:3000/urls/' + id)
+            .then( res => console.log(res.data));
+        setUrl( url.filter( elem => elem._id !== id));
 
-        await fetch('http://localhost:3000/urls/' + id, {method: 'DELETE'})
-            .then( res => res.json())
-            .then( res => {
-                console.log('Deleted: ', res.message)
-            })
-            .catch( err => console.error(err))
+        // await fetch('http://localhost:3000/urls/' + id, {method: 'DELETE'})
+        //     .then( res => res.json())
+        //     .then( res => {
+        //         console.log('Deleted: ', res.message)
+        //     })
+        //     .catch( err => console.error(err))
     };
 
     const urlList = () => (

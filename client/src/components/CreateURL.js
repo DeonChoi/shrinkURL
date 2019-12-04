@@ -1,21 +1,45 @@
-import React from 'react';
-// import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/CreateURL.css';
 
 const CreateURL = () => {
 
-    // useEffect( () => {
-    //     axios.get('http://localhost:5000/users/')
-    // }, []);
+    const [newLink, setNewLink] = useState('');
+    
+    const onChangeLink = e => {
+        setNewLink('https://' + e.target.value);
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const link = {
+            link: newLink
+        };
+        console.log(link);
+        // await fetch('http://localhost:3000/urls/add', {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: { "link": newLink }
+        // })
+            // .then( res => res.json())
+            // .then( res => {
+            //     console.log('Created: ', res.message)
+            // })
+            // .catch( err => console.error(err))
+        
+         axios.post('http://localhost:3000/urls/add', link)
+            .then( res => console.log(res.data))
+            .catch( err => console.error(err));
+    }
 
     return (
         <div className='container'>
             <h1 className='text-center display-4'>Create URL</h1>
             <p className='text-center'>Enter a URL</p>
-            <form className='justify-content-center'>
+            <form className='justify-content-center' onSubmit={onSubmit} >
                 <div className='form-group input-group ml-auto mr-auto col-6'>
-                    <input type='text' className='form-control w-25' value='https://www.' disabled readOnly/>
-                    <input type='url' className='form-control w-75' placeholder='example.com' />
+                    <input type='text' className='form-control w-25' value='https://' disabled readOnly/>
+                    <input type='text' className='form-control w-75' placeholder='example.com' onChange={onChangeLink} />
                 </div>
                 <div className='form-group row justify-content-center'>
                     <button type="submit" className='btn btn-primary'>Submit</button>
