@@ -16,8 +16,8 @@ function App() {
           <Link to={'/'} className='navbar-brand'>
             <img src={brandLogo} alt='Brand Logo' height='75'/>
           </Link>
-          <Link to={'/my-urls'} className='navbar text-dark nav-link'>My URLs</Link>
-          <Link to={'/create-urls'} className='navbar text-dark nav-link'>Create New URL</Link>
+          <Link to={'/urls'} className='navbar text-dark nav-link'>My URLs</Link>
+          <Link to={'/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
         </div>
         <div className='collapse navbar-collapse justify-content-end'>
           <Link to={'/register'} className='navbar text-dark nav-link'>Register</Link>
@@ -30,8 +30,8 @@ function App() {
 
     <main>
       <Route exact path='/' component={Home} />
-      <Route path='/create-urls' component={CreateURL} />
-      <Route path='/my-urls' component={MyURL} />  
+      <Route exact path='/urls' component={MyURL} />  
+      <Route exact path='/urls/add' component={CreateURL} />
       <Route path='/register' component={Register} />
       <Route path='/login' component={Login} />  
     </main>

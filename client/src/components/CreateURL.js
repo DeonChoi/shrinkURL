@@ -1,7 +1,13 @@
 import React from 'react';
+// import axios from 'axios';
 import '../styles/CreateURL.css';
 
 const CreateURL = () => {
+
+    // useEffect( () => {
+    //     axios.get('http://localhost:5000/users/')
+    // }, []);
+
     return (
         <div className='container'>
             <h1 className='text-center display-4'>Create URL</h1>
