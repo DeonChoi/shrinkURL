@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/CreateURL.css';
 const validUrl = require('valid-url');
 
 
@@ -37,7 +36,8 @@ const CreateURL = (props) => {
                 .then( res => console.log(res.data))
                 .catch( err => console.error(err));
     
-            // props.history.push('/urls/');
+           
+            props.history.push('/urls/');
         } else {
             alert('Please enter a valid URL');
         }

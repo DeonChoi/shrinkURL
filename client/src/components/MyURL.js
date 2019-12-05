@@ -3,8 +3,16 @@ import axios from 'axios';
 
 const URL = props => (
     <tr>
-        <td>{props.thisURL.shortUrl}</td>
-        <td>{props.thisURL.longUrl}</td>
+        <td>
+            <a href={props.thisURL.shortUrl} target='_blank'>
+            {props.thisURL.shortUrl}
+            </a>
+        </td>
+        <td>
+            <a href={props.thisURL.longUrl} target='_blank'>
+            {props.thisURL.longUrl}
+            </a>
+        </td>
         <td>
             <button href='' onClick={ ()=>{props.deleteUrl(props.thisURL._id)}} className='btn btn-primary' >Delete</button>
         </td>
@@ -13,11 +21,12 @@ const URL = props => (
 
 const MyURL = () => {
 
+    
     const [url, setUrl] = useState([]);
 
     useEffect( () => {
         getURLS();
-    }, []);
+    }, [url]);
 
     const getURLS =  () => {
         axios.get('http://localhost:3000/urls/')

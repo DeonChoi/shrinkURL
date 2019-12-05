@@ -23,7 +23,8 @@ router.route('/').get( (req,res) => {
 router.route('/add').post( async (req, res) => {
 
     const { longUrl }  = req.body;
-    console.log(req.body)
+    console.log(req.body);
+
     const baseUrl = 'http://localhost:3000';
 
     // check base url
@@ -64,6 +65,9 @@ router.route('/add').post( async (req, res) => {
     } else {
         res.status(401).json('Invalid long url');
     }
+
+    res.redirect('..');
+        // .then(location.reload());
 
 });
 
