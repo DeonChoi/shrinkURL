@@ -1,4 +1,8 @@
 const router = require('express').Router();
+
+const validUrl = require('valid-url');
+const shortid = require('shortid');
+
 let Url = require('../models/urls.model');
 
 router.route('/').get( (req,res) => {
@@ -7,13 +11,60 @@ router.route('/').get( (req,res) => {
         .catch( err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post( (req, res) => {
-    const link = req.body.link;
-    const newUrl = new Url({link});
+// router.route('/add').post( (req, res) => {
+//     const link = req.body.link;
+//     const newUrl = new Url({link});
 
-    newUrl.save()
-        .then( () => res.json('Url added!'))
-        .catch( err => res.status(400).json('Error: ' + err));
+//     newUrl.save()
+//         .then( () => res.json('Url added!'))
+//         .catch( err => res.status(400).json('Error: ' + err));
+// });
+
+router.route('/add').post( async (req, res) => {
+
+    const { longUrl }  = req.body;
+    console.log(req.body)
+    const baseUrl = 'http://localhost:3000';
+
+    // check base url
+    if (!validUrl.isUri(baseUrl)) {
+        return res.status(401).json('Invalid base url');
+    }
+    
+    //create url code
+    const urlCode = shortid.generate();
+
+    //check long url
+    if (validUrl.isUri(longUrl)) {
+        
+        try {
+            let url = await Url.findOne({ longUrl });
+            
+            if (url) {
+                res.json(url);
+            } else {
+                const shortUrl = baseUrl + '/' + urlCode;
+
+                url = new Url ({
+                    longUrl: longUrl,
+                    shortUrl: shortUrl,
+                    urlCode: urlCode,
+                    date: new Date()
+                });
+                
+                await url.save();
+                res.json(url);
+            }
+            
+        } catch (err) {
+            console.error(err);
+            res.status(500).json('Server Error');
+        }
+        
+    } else {
+        res.status(401).json('Invalid long url');
+    }
+
 });
 
 router.route('/:id').get( (req, res) => {

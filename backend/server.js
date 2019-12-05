@@ -9,7 +9,6 @@ const port = 3000;
 
 app.use(cors());
 app.use(express.json());
-// app.use(express.json({extended: false}));
 
 const uri = process.env.DB_CONNECTION;
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
@@ -20,12 +19,10 @@ connection.once('open', () => {
 });
 
 const urlsRouter = require('./routes/urls');
+const redirectRouter = require('./routes/index');
 
 app.use('/urls', urlsRouter);
-
-// app.get('/', (req, res) => {
-//     res.send('Hello World!');
-// });
+app.use('/', redirectRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
