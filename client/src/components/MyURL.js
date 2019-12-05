@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// import '../styles/Home.css';
-
-
 const URL = props => (
     <tr>
-        <td>{props.thisURL.link}</td>
-        <td>{props.thisURL.link}</td>
+        <td>{props.thisURL.shortUrl}</td>
+        <td>{props.thisURL.longUrl}</td>
         <td>
             <button href='' onClick={ ()=>{props.deleteUrl(props.thisURL._id)}} className='btn btn-primary' >Delete</button>
         </td>
