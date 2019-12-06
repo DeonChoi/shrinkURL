@@ -3,7 +3,7 @@ import axios from 'axios';
 const validUrl = require('valid-url');
 
 
-const CreateURL = (props) => {
+const CreateURL = () => {
 
     const [newLink, setNewLink] = useState('');
     
@@ -36,8 +36,6 @@ const CreateURL = (props) => {
                 .then( res => console.log(res.data))
                 .catch( err => console.error(err));
     
-           
-            props.history.push('/urls/');
         } else {
             alert('Please enter a valid URL');
         }
@@ -50,7 +48,6 @@ const CreateURL = (props) => {
             <p className='text-center'>Enter a URL</p>
             <form className='justify-content-center' onSubmit={onSubmit} >
                 <div className='form-group input-group ml-auto mr-auto col-6'>
-                    {/* <input type='text' className='form-control w-25' value='https://' disabled readOnly/> */}
                     <input type='text' className='form-control w-75 text-center' placeholder='https://www.example.com' onChange={onChangeLink} />
                 </div>
                 <div className='form-group row justify-content-center'>

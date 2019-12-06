@@ -23,7 +23,7 @@ router.route('/').get( (req,res) => {
 router.route('/add').post( async (req, res) => {
 
     const { longUrl }  = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
     const baseUrl = 'http://localhost:3000';
 
@@ -42,7 +42,7 @@ router.route('/add').post( async (req, res) => {
             let url = await Url.findOne({ longUrl });
             
             if (url) {
-                res.json(url);
+                return res.json(url);
             } else {
                 const shortUrl = baseUrl + '/' + urlCode;
 
@@ -52,22 +52,22 @@ router.route('/add').post( async (req, res) => {
                     urlCode: urlCode,
                     date: new Date()
                 });
-                
-                await url.save();
-                res.json(url);
+
+                await url.save()
+                    .then( () => {
+                        res.json('Url added!');
+                        // res.location('..')
+                    })
+                    .catch( err => res.status(400).json('Error: ' + err));
             }
             
         } catch (err) {
             console.error(err);
             res.status(500).json('Server Error');
         }
-        
     } else {
         res.status(401).json('Invalid long url');
     }
-
-    res.redirect('..');
-        // .then(location.reload());
 
 });
 

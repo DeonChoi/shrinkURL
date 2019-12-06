@@ -4,12 +4,12 @@ import axios from 'axios';
 const URL = props => (
     <tr>
         <td>
-            <a href={props.thisURL.shortUrl} target='_blank'>
+            <a href={props.thisURL.shortUrl} target='_blank' rel='noopener noreferrer'>
             {props.thisURL.shortUrl}
             </a>
         </td>
         <td>
-            <a href={props.thisURL.longUrl} target='_blank'>
+            <a href={props.thisURL.longUrl} target='_blank' rel='noopener noreferrer'>
             {props.thisURL.longUrl}
             </a>
         </td>
@@ -26,7 +26,7 @@ const MyURL = () => {
 
     useEffect( () => {
         getURLS();
-    }, [url]);
+    }, []);
 
     const getURLS =  () => {
         axios.get('http://localhost:3000/urls/')
@@ -64,7 +64,7 @@ const MyURL = () => {
     );
 
     return (
-        <div className='container'>
+        <div className='container-fluid'>
             <h1 className='text-center display-4'>My URLs</h1>
             <table className='table'>
                 <thead>
