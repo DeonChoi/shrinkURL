@@ -20,8 +20,8 @@ function App() {
           <Link to={'/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
         </div>
         <div className='collapse navbar-collapse justify-content-end'>
-          <Link to={'/register'} className='navbar text-dark nav-link'>Register</Link>
-          <Link to={'/login'} className='navbar text-dark nav-link'>Login</Link>
+          <Link to={'/user/register'} className='navbar text-dark nav-link'>Register</Link>
+          <Link to={'/user/login'} className='navbar text-dark nav-link'>Login</Link>
         </div>
         
         {/* <Link to={'/'} class='navbar-brand'>Log Out</Link> */}
@@ -32,8 +32,8 @@ function App() {
       <Route exact path='/' component={Home} />
       <Route exact path='/urls' component={MyURL} />  
       <Route exact path='/urls/add' component={CreateURL} />
-      <Route path='/register' component={Register} />
-      <Route path='/login' component={Login} />  
+      <Route path='/user/register' component={Register} />
+      <Route path='/user/login' component={Login} />  
     </main>
 
     </Router>

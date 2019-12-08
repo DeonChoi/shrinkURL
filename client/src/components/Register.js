@@ -7,6 +7,12 @@ const Register = () => {
             <h1 className='text-center display-4'>Register</h1>
             <form className='justify-content-center'>
                 <div className='form-group col-4 ml-auto mr-auto'>
+                    <input type='text' className='form-control' placeholder='First Name' />
+                </div>
+                <div className='form-group col-4 ml-auto mr-auto'>
+                    <input type='text' className='form-control' placeholder='Last Name' />
+                </div>
+                <div className='form-group col-4 ml-auto mr-auto'>
                     <input type='email' className='form-control' placeholder='Email Address' />
                 </div>
                 <div className='form-group col-4 ml-auto mr-auto'>
