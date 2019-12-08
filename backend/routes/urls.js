@@ -3,7 +3,7 @@ const router = require('express').Router();
 const validUrl = require('valid-url');
 const shortid = require('shortid');
 
-let Url = require('../models/urls.model');
+const Url = require('../models/urls.model');
 
 router.route('/').get( (req,res) => {
     Url.find()
