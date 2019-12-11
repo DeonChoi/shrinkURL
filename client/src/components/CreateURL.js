@@ -1,9 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 const validUrl = require('valid-url');
 
 
 const CreateURL = () => {
+
+    useEffect( () => {
+        getUserID();
+    }, []);
+
+    const getUserID =  () => {
+        axios.get('http://localhost:3000/urls/', { headers:  {'auth-token': localStorage.getItem('auth-token') } })
+        .then( res => {
+            console.log(res.data);
+        })
+        .catch( err => {
+            console.log(err);
+        });
+    }
 
     const [newLink, setNewLink] = useState('');
     
@@ -23,17 +37,19 @@ const CreateURL = () => {
             
             // await fetch('http://localhost:3000/urls/add', {
             //     method: "POST",
-            //     headers: { "Content-Type": "application/json" },
-            //     body: { "link": newLink }
+            //     headers: { "Content-Type": "application/json"},
+            //     body: { "longUrl": newLink }
+            //     // body: JSON.stringify({ "longUrl": newLink })
             // })
-                // .then( res => res.json())
-                // .then( res => {
-                //     console.log('Created: ', res.message)
-                // })
-                // .catch( err => console.error(err))
+            //     .then( res => res.text())
+            //     .then( text => console.log(text))
+            //     // .then( res => {
+            //     //     console.log('Created: ', res.message)
+            //     // })
+            //     .catch( err => console.error(err))
             
-             axios.post('http://localhost:3000/urls/add', link)
-                .then( res => console.log(res.data))
+            await axios.post('http://localhost:3000/urls/add', link, { headers:  {'auth-token': localStorage.getItem('auth-token') } } )
+                .then( res => console.log(res))
                 .catch( err => console.error(err));
     
         } else {

@@ -1,22 +1,58 @@
-import React from 'react';
-// import '../styles/Home.css';
+import React, { useState } from 'react';
+import axios from 'axios';
+
 
 const Register = () => {
+
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onChangeFirstName = e => {
+        setFirstName(e.target.value);
+    };
+
+    const onChangeLastName = e => {
+        setLastName(e.target.value);
+    };
+
+    const onChangeEmail = e => {
+        setEmail(e.target.value);
+    };
+
+    const onChangePassword = e => {
+        setPassword(e.target.value);
+    };
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const userRegister = {
+            firstName,
+            lastName,
+            email,
+            password
+        };
+        await axios.post('http://localhost:3000/user/register', userRegister)
+                .then( res => console.log(res))
+                .catch( err => console.error(err));
+    };
+
     return (
         <div className='container'>
             <h1 className='text-center display-4'>Register</h1>
-            <form className='justify-content-center'>
+            <form className='justify-content-center' onSubmit={onSubmit} >
                 <div className='form-group col-4 ml-auto mr-auto'>
-                    <input type='text' className='form-control' placeholder='First Name' />
+                    <input type='text' className='form-control' placeholder='First Name' onChange={onChangeFirstName} />
                 </div>
                 <div className='form-group col-4 ml-auto mr-auto'>
-                    <input type='text' className='form-control' placeholder='Last Name' />
+                    <input type='text' className='form-control' placeholder='Last Name' onChange={onChangeLastName} />
                 </div>
                 <div className='form-group col-4 ml-auto mr-auto'>
-                    <input type='email' className='form-control' placeholder='Email Address' />
+                    <input type='email' className='form-control' placeholder='Email Address' onChange={onChangeEmail} />
                 </div>
                 <div className='form-group col-4 ml-auto mr-auto'>
-                    <input type='password' className='form-control' placeholder='Password' />
+                    <input type='password' className='form-control' placeholder='Password' onChange={onChangePassword} />
                 </div>
                 <div className='form-group row justify-content-center'>
                     <button type="submit" className='btn btn-primary'>Register</button>

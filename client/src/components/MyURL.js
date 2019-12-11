@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/CreateURL.css';
 
 const URL = props => (
-    <tr>
-        <td>
+    <tr className='row' scope='row'>
+        <td className='col-2' scope='col'>
             <a href={props.thisURL.shortUrl} target='_blank' rel='noopener noreferrer'>
             {props.thisURL.shortUrl}
             </a>
         </td>
-        <td>
+        <td className='col-4 long-url' scope='col'>
             <a href={props.thisURL.longUrl} target='_blank' rel='noopener noreferrer'>
             {props.thisURL.longUrl}
             </a>
         </td>
-        <td>
+        <td className='col-2' scope='col'>
             <button href='' onClick={ ()=>{props.deleteUrl(props.thisURL._id)}} className='btn btn-primary' >Delete</button>
         </td>
     </tr>
@@ -28,8 +29,8 @@ const MyURL = () => {
         getURLS();
     }, []);
 
-    const getURLS =  () => {
-        axios.get('http://localhost:3000/urls/')
+    const getURLS =  async (id) => {
+        await axios.get('http://localhost:3000/urls/', { headers:  {'auth-token': localStorage.getItem('auth-token') } })
         .then( res => {
             setUrl(res.data);
             console.log(res.data);
@@ -64,14 +65,14 @@ const MyURL = () => {
     );
 
     return (
-        <div className='container-fluid'>
+        <div className='container table-responsive'>
             <h1 className='text-center display-4'>My URLs</h1>
-            <table className='table'>
+            <table className='table justify-content-center'>
                 <thead>
-                    <tr>
-                        <th scope='col'>Short URL</th>
-                        <th scope='col'>Long URL</th>
-                        <th scope='col'>Delete</th>
+                    <tr className='row'>
+                        <th scope='col' className='col-2'>Short URL</th>
+                        <th scope='col' className='col-4'>Long URL</th>
+                        <th scope='col' className='col-2'>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
