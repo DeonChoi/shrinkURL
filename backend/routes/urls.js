@@ -1,12 +1,24 @@
 const router = require('express').Router();
+const verify = require('./verifyToken');
 
 const validUrl = require('valid-url');
 const shortid = require('shortid');
 
 const Url = require('../models/urls.model');
 
-router.route('/').get( (req,res) => {
-    Url.find()
+// router.get('/:userID', verify, (req,res) => {
+//     Url.findById(req.params.id)
+//     .then( url => res.json(url))
+//     .catch( err => res.status(400).json('Error: ' + err));
+// });
+
+router.get('/', verify, (req,res) => {
+    console.log(req.user);
+    console.log(req.user._id);
+    Url.find({userID: req.user._id})
+    // Url.find()
+        // .then( urls => console.log(urls))
+
         .then( urls => res.json(urls))
         .catch( err => res.status(400).json('Error: ' + err));
 });
@@ -20,7 +32,9 @@ router.route('/').get( (req,res) => {
 //         .catch( err => res.status(400).json('Error: ' + err));
 // });
 
-router.route('/add').post( async (req, res) => {
+router.post('/add', verify, async (req, res) => {
+    console.log(req.user);
+    let userID = req.user._id;
 
     const { longUrl }  = req.body;
     // console.log(req.body);
@@ -50,6 +64,7 @@ router.route('/add').post( async (req, res) => {
                     longUrl: longUrl,
                     shortUrl: shortUrl,
                     urlCode: urlCode,
+                    userID: userID,
                     date: new Date()
                 });
 
@@ -59,6 +74,11 @@ router.route('/add').post( async (req, res) => {
                         // res.location('..')
                     })
                     .catch( err => res.status(400).json('Error: ' + err));
+                
+                    // res.redirect('..');
+
+                    //check this line below once you get home
+                //res.redirect('..');
             }
             
         } catch (err) {
@@ -71,11 +91,7 @@ router.route('/add').post( async (req, res) => {
 
 });
 
-router.route('/:id').get( (req, res) => {
-    Url.findById(req.params.id)
-        .then( url => res.json(url))
-        .catch( err => res.status(400).json('Error: ' + err));
-});
+
 
 router.route('/:id').delete( (req, res) => {
     Url.findByIdAndDelete(req.params.id)

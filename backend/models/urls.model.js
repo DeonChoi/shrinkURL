@@ -5,6 +5,7 @@ const urlSchema = new Schema({
     urlCode: String,
     longUrl: String,
     shortUrl: String,
+    userID: String,
     date: { type: String, default: Date.now }
 }, {
     timestamps: true,
