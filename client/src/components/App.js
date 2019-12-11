@@ -11,18 +11,18 @@ import Login from './Login';
 function App() {
   return (
     <Router basename={'/'}>
-      <nav className='navbar navbar-expand-lg navbar-light bg-light'>
-        <div className='collapse navbar-collapse justify-content-start'>
-          <Link to={'/'} className='navbar-brand'>
+      <nav className='navbar navbar-default navbar-expand-lg bg-light'>
+        <ul className='navbar-nav mr-auto'>
+          <Link to={'/'} className='navbar-brand nav-link'>
             <img src={brandLogo} alt='Brand Logo' height='75'/>
           </Link>
           <Link to={'/urls'} className='navbar text-dark nav-link'>My URLs</Link>
           <Link to={'/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
-        </div>
-        <div className='collapse navbar-collapse justify-content-end'>
+        </ul>
+        <ul className='navbar-nav'>
           <Link to={'/user/register'} className='navbar text-dark nav-link'>Register</Link>
           <Link to={'/user/login'} className='navbar text-dark nav-link'>Login</Link>
-        </div>
+        </ul>
         
         {/* <Link to={'/'} class='navbar-brand'>Log Out</Link> */}
       </nav>

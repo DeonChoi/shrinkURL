@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 
-const Register = () => {
+const Register = (props) => {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -34,7 +34,7 @@ const Register = () => {
             password
         };
         await axios.post('http://localhost:3000/user/register', userRegister)
-                .then( res => console.log(res))
+                .then( res => {console.log(res); props.history.push('./login')})
                 .catch( err => console.error(err));
     };
 

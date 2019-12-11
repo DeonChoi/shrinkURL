@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -21,7 +21,7 @@ const Login = () => {
             password
         };
         axios.post('http://localhost:3000/user/login', userLogin)
-                .then( res => {console.log(res); localStorage.setItem('auth-token', res.data);})
+                .then( res => {console.log(res); localStorage.setItem('auth-token', res.data); props.history.push('../urls/add')})
                 .catch( err => console.error(err));
         console.log(localStorage.getItem('auth-token'));
     };

@@ -3,7 +3,7 @@ import axios from 'axios';
 const validUrl = require('valid-url');
 
 
-const CreateURL = () => {
+const CreateURL = (props) => {
 
     useEffect( () => {
         getUserID();
@@ -49,7 +49,7 @@ const CreateURL = () => {
             //     .catch( err => console.error(err))
             
             await axios.post('http://localhost:3000/urls/add', link, { headers:  {'auth-token': localStorage.getItem('auth-token') } } )
-                .then( res => console.log(res))
+                .then( res => {console.log(res); props.history.push('./')})
                 .catch( err => console.error(err));
     
         } else {
