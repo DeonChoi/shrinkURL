@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
-// const cookieSession = require('cookie-session');
 
 require('dotenv').config();
 
@@ -12,9 +11,6 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cookieSession({
-//     token: 
-//   }))
 
 mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true});
 

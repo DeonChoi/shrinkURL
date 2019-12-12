@@ -6,38 +6,17 @@ const shortid = require('shortid');
 
 const Url = require('../models/urls.model');
 
-// router.get('/:userID', verify, (req,res) => {
-//     Url.findById(req.params.id)
-//     .then( url => res.json(url))
-//     .catch( err => res.status(400).json('Error: ' + err));
-// });
 
 router.get('/', verify, (req,res) => {
-    console.log(req.user);
-    console.log(req.user._id);
     Url.find({userID: req.user._id})
-    // Url.find()
-        // .then( urls => console.log(urls))
-
         .then( urls => res.json(urls))
         .catch( err => res.status(400).json('Error: ' + err));
 });
 
-// router.route('/add').post( (req, res) => {
-//     const link = req.body.link;
-//     const newUrl = new Url({link});
-
-//     newUrl.save()
-//         .then( () => res.json('Url added!'))
-//         .catch( err => res.status(400).json('Error: ' + err));
-// });
-
 router.post('/add', verify, async (req, res) => {
-    console.log(req.user);
     let userID = req.user._id;
 
     const { longUrl }  = req.body;
-    // console.log(req.body);
 
     const baseUrl = 'http://localhost:3000';
 
@@ -71,14 +50,8 @@ router.post('/add', verify, async (req, res) => {
                 await url.save()
                     .then( () => {
                         res.json('Url added!');
-                        // res.location('..')
                     })
                     .catch( err => res.status(400).json('Error: ' + err));
-                
-                    // res.redirect('..');
-
-                    //check this line below once you get home
-                //res.redirect('..');
             }
             
         } catch (err) {
@@ -91,24 +64,22 @@ router.post('/add', verify, async (req, res) => {
 
 });
 
-
-
-router.route('/:id').delete( (req, res) => {
+router.delete('/:id', (req,res) => {
     Url.findByIdAndDelete(req.params.id)
-        .then( url => res.json('Url deleted!'))
-        .catch( err => res.status(400).json('Error: ' + err));
+    .then( url => res.json('Url deleted!'))
+    .catch( err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').put( (req, res) => {
-    Url.findById(req.params.id)
-        .then( url => {
-            url.link = req.body.link;
+// router.route('/:id').put( (req, res) => {
+//     Url.findById(req.params.id)
+//         .then( url => {
+//             url.link = req.body.link;
 
-            url.save()
-                .then( () => res.json('Url updated!'))
-                .catch( err => res.status(400).json('Error: ' + err));
-        })
-        .catch( err => res.status(400).json('Error: ' + err));
-});
+//             url.save()
+//                 .then( () => res.json('Url updated!'))
+//                 .catch( err => res.status(400).json('Error: ' + err));
+//         })
+//         .catch( err => res.status(400).json('Error: ' + err));
+// });
 
 module.exports = router;
