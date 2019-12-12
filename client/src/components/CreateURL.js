@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 const validUrl = require('valid-url');
 
 
 const CreateURL = (props) => {
 
-    useEffect( () => {
-        getUserID();
-    }, []);
-
-    const getUserID =  () => {
-        axios.get('http://localhost:3000/urls/', { headers:  {'auth-token': localStorage.getItem('auth-token') } })
-        .then( res => {
-            console.log(res.data);
-        })
-        .catch( err => {
-            console.log(err);
-        });
+    if (!localStorage.getItem('auth-token')) {
+        props.history.push('../user/login');
     }
 
     const [newLink, setNewLink] = useState('');
@@ -33,23 +23,16 @@ const CreateURL = (props) => {
                 longUrl: newLink
             };
             console.log(link);
-    
             
-            // await fetch('http://localhost:3000/urls/add', {
-            //     method: "POST",
-            //     headers: { "Content-Type": "application/json"},
-            //     body: { "longUrl": newLink }
-            //     // body: JSON.stringify({ "longUrl": newLink })
-            // })
-            //     .then( res => res.text())
-            //     .then( text => console.log(text))
-            //     // .then( res => {
-            //     //     console.log('Created: ', res.message)
-            //     // })
-            //     .catch( err => console.error(err))
-            
-            await axios.post('http://localhost:3000/urls/add', link, { headers:  {'auth-token': localStorage.getItem('auth-token') } } )
-                .then( res => {console.log(res); props.history.push('./')})
+            const headers = {
+                headers: {
+                    'auth-token': localStorage.getItem('auth-token')
+                }
+            };
+
+            await axios.post('http://localhost:3000/urls/add', link, headers )
+                .then( res => props.history.push('./'))
+                // .then( res => {console.log(res); props.history.push('./');})
                 .catch( err => console.error(err));
     
         } else {

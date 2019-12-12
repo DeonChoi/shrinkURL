@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom';
 import '../styles/App.css';
 import brandLogo from '../images/navbarBrand.png';
@@ -7,8 +7,20 @@ import MyURL from './MyURL';
 import CreateURL from './CreateURL';
 import Register from './Register';
 import Login from './Login';
+import Logout from './Logout';
 
-function App() {
+const App = () => {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect( () => {
+    toggleLoggedIn();
+  }, []);
+
+  const toggleLoggedIn = () => {
+    localStorage.getItem('auth-token') ? setLoggedIn(true) : setLoggedIn(false);
+  };
+
   return (
     <Router basename={'/'}>
       <nav className='navbar navbar-default navbar-expand-lg bg-light'>
@@ -20,11 +32,18 @@ function App() {
           <Link to={'/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
         </ul>
         <ul className='navbar-nav'>
-          <Link to={'/user/register'} className='navbar text-dark nav-link'>Register</Link>
-          <Link to={'/user/login'} className='navbar text-dark nav-link'>Login</Link>
+          
+          { loggedIn
+          ? null
+          : <Link to={'/user/register'} className='navbar text-dark nav-link'>Register</Link>
+          }
+          
+          { loggedIn
+          ? <Link to={'/user/logout'} className='navbar text-dark nav-link' onClick={toggleLoggedIn}>Logout</Link>
+          : <Link to={'/user/login'} className='navbar text-dark nav-link' >Login</Link>
+          }
+          
         </ul>
-        
-        {/* <Link to={'/'} class='navbar-brand'>Log Out</Link> */}
       </nav>
 
 
@@ -33,7 +52,12 @@ function App() {
       <Route exact path='/urls' component={MyURL} />  
       <Route exact path='/urls/add' component={CreateURL} />
       <Route path='/user/register' component={Register} />
-      <Route path='/user/login' component={Login} />  
+
+      { loggedIn
+      ? <Route path='/user/logout' component={Logout} />  
+      : <Route path='/user/login' component={Login} />  
+      }
+
     </main>
 
     </Router>

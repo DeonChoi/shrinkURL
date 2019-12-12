@@ -20,8 +20,11 @@ const URL = props => (
     </tr>
 )
 
-const MyURL = () => {
+const MyURL = (props) => {
 
+    if (!localStorage.getItem('auth-token')) {
+        props.history.push('../user/login');
+    }
     
     const [url, setUrl] = useState([]);
 
@@ -33,29 +36,18 @@ const MyURL = () => {
         await axios.get('http://localhost:3000/urls/', { headers:  {'auth-token': localStorage.getItem('auth-token') } })
         .then( res => {
             setUrl(res.data);
-            console.log(res.data);
-            console.log(url);
+            // console.log(res.data);
+            // console.log(url);
         })
         .catch( err => {
             console.log(err);
         });
-        // const response = await fetch('http://localhost:3000/urls/');
-        // const data = await response.json();
-        // setUrl(data);
-        // console.log(url, data);
     }
 
     const deleteUrl =  (id) => {
         axios.delete('http://localhost:3000/urls/' + id)
             .then( res => console.log(res.data));
         setUrl( url.filter( elem => elem._id !== id));
-
-        // await fetch('http://localhost:3000/urls/' + id, {method: 'DELETE'})
-        //     .then( res => res.json())
-        //     .then( res => {
-        //         console.log('Deleted: ', res.message)
-        //     })
-        //     .catch( err => console.error(err))
     };
 
     const urlList = () => (

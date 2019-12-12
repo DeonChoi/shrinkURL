@@ -20,10 +20,10 @@ const Login = (props) => {
             email,
             password
         };
-        axios.post('http://localhost:3000/user/login', userLogin)
-                .then( res => {console.log(res); localStorage.setItem('auth-token', res.data); props.history.push('../urls/add')})
+        await axios.post('http://localhost:3000/user/login', userLogin)
+                .then( res => {console.log(res); console.log('Logged In'); localStorage.setItem('auth-token', res.data); props.history.push('../urls/add'); window.location.reload();})
                 .catch( err => console.error(err));
-        console.log(localStorage.getItem('auth-token'));
+        // console.log(localStorage.getItem('auth-token'));
     };
 
     return (
