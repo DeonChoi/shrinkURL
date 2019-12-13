@@ -13,7 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true, useUnifiedTopology: true});
+const dbURI = process.env.DB_CONNECTION;
+
+mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
 
 const connection = mongoose.connection;
 connection.once('open', () => {
