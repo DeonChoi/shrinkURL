@@ -4,3 +4,11 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+td {
+    word-wrap:break-word;
+    word-break:break-all;
+  }
+  table {
+    table-layout:fixed;
+    width:100%;
+}

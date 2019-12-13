@@ -30,8 +30,8 @@ const CreateURL = (props) => {
                 }
             };
 
-            await axios.post('http://localhost:3000/urls/add', link, headers )
-                .then( res => props.history.push('./'))
+            await axios.post('/api/urls/add', link, headers )
+                .then( res => props.history.push('./get'))
                 // .then( res => {console.log(res); props.history.push('./');})
                 .catch( err => console.error(err));
     

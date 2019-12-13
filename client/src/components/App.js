@@ -25,22 +25,22 @@ const App = () => {
     <Router basename={'/'}>
       <nav className='navbar navbar-default navbar-expand-lg bg-light'>
         <ul className='navbar-nav mr-auto'>
-          <Link to={'/'} className='navbar-brand nav-link'>
+          <Link to={'/api/'} className='navbar-brand nav-link'>
             <img src={brandLogo} alt='Brand Logo' height='75'/>
           </Link>
-          <Link to={'/urls'} className='navbar text-dark nav-link'>My URLs</Link>
-          <Link to={'/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
+          <Link to={'/api/urls/get'} className='navbar text-dark nav-link'>My URLs</Link>
+          <Link to={'/api/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
         </ul>
         <ul className='navbar-nav'>
           
           { loggedIn
           ? null
-          : <Link to={'/user/register'} className='navbar text-dark nav-link'>Register</Link>
+          : <Link to={'/api/user/register'} className='navbar text-dark nav-link'>Register</Link>
           }
           
           { loggedIn
-          ? <Link to={'/user/logout'} className='navbar text-dark nav-link' onClick={toggleLoggedIn}>Logout</Link>
-          : <Link to={'/user/login'} className='navbar text-dark nav-link' >Login</Link>
+          ? <Link to={'/api/user/logout'} className='navbar text-dark nav-link' onClick={toggleLoggedIn}>Logout</Link>
+          : <Link to={'/api/user/login'} className='navbar text-dark nav-link' >Login</Link>
           }
           
         </ul>
@@ -48,14 +48,14 @@ const App = () => {
 
 
     <main>
-      <Route exact path='/' component={Home} />
-      <Route exact path='/urls' component={MyURL} />  
-      <Route exact path='/urls/add' component={CreateURL} />
-      <Route path='/user/register' component={Register} />
+      <Route exact path='/api/' component={Home} />
+      <Route exact path='/api/urls/get' component={MyURL} />  
+      <Route exact path='/api/urls/add' component={CreateURL} />
+      <Route exact path='/api/user/register' component={Register} />
 
       { loggedIn
-      ? <Route path='/user/logout' component={Logout} />  
-      : <Route path='/user/login' component={Login} />  
+      ? <Route path='/api/user/logout' component={Logout} />  
+      : <Route path='/api/user/login' component={Login} />  
       }
 
     </main>
