@@ -60,6 +60,7 @@ const App = () => {
 
     </main>
 
+      <footer className='text-center fixed-bottom bg-light font-weight-light text-monospace'>Made By <a href='https://deonchoi.com/' target='_blank' rel='noopener noreferrer'>Deon</a> <a href='https://github.com/deonchoi' target='_blank' rel='noopener noreferrer'>Choi</a></footer>
     </Router>
   );
 }
