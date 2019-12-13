@@ -7,7 +7,7 @@ const shortid = require('shortid');
 const Url = require('../models/urls.model');
 
 
-router.get('/', verify, (req,res) => {
+router.get('/get', verify, (req,res) => {
     Url.find({userID: req.user._id})
         .then( urls => res.json(urls))
         .catch( err => res.status(400).json('Error: ' + err));
@@ -18,7 +18,7 @@ router.post('/add', verify, async (req, res) => {
 
     const { longUrl }  = req.body;
 
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = `http://localhost:${process.env.port || 3000}/api`;
 
     // check base url
     if (!validUrl.isUri(baseUrl)) {
