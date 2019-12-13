@@ -18,7 +18,8 @@ router.post('/add', verify, async (req, res) => {
 
     const { longUrl }  = req.body;
 
-    const baseUrl = `http://localhost:${process.env.port || 3000}/api`;
+    // const baseUrl = `http://localhost:${process.env.port || 3000}/api`;
+    const baseUrl = `https://shrinkurlapp.herokuapp.com/api`;
 
     // check base url
     if (!validUrl.isUri(baseUrl)) {
