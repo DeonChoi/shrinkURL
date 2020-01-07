@@ -58,7 +58,7 @@ const App = () => {
       <ResponsiveMenu
         menuOpenButton={<div>Menu</div>}
         menuCloseButton={<div>X</div>}
-        changeMenuOn="600px"
+        changeMenuOn="995px"
        
         menu={
         
