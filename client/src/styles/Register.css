@@ -1,0 +1,11 @@
+.formInput {
+    width: 50%;
+}
+.formTitle {
+    font-size: 2rem;
+}
+@media only screen and (min-width: 1025px) {
+    .formInput {
+        width: 30%;
+    }
+  }
