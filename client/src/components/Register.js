@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/Register.css';
 
 
 const Register = (props) => {
@@ -40,18 +41,18 @@ const Register = (props) => {
 
     return (
         <div className='container'>
-            <h1 className='text-center display-4'>Register</h1>
+            <h1 className='text-center formTitle'>Register</h1>
             <form className='justify-content-center' onSubmit={onSubmit} >
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='text' className='form-control' placeholder='First Name' onChange={onChangeFirstName} />
                 </div>
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='text' className='form-control' placeholder='Last Name' onChange={onChangeLastName} />
                 </div>
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='email' className='form-control' placeholder='Email Address' onChange={onChangeEmail} />
                 </div>
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='password' className='form-control' placeholder='Password' onChange={onChangePassword} />
                 </div>
                 <div className='form-group row justify-content-center'>

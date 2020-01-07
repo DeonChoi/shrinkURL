@@ -43,10 +43,10 @@ const CreateURL = (props) => {
 
     return (
         <div className='container'>
-            <h1 className='text-center display-4'>Create URL</h1>
+            <h1 className='text-center formTitle'>Create URL</h1>
             <p className='text-center'>Enter a URL</p>
             <form className='justify-content-center' onSubmit={onSubmit} >
-                <div className='form-group input-group ml-auto mr-auto col-6'>
+                <div className='form-group input-group ml-auto mr-auto urlInput'>
                     <input type='text' className='form-control w-75 text-center' placeholder='https://www.example.com' onChange={onChangeLink} />
                 </div>
                 <div className='form-group row justify-content-center'>

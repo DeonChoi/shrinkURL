@@ -4,3 +4,14 @@
 .home-row {
     height: 100%;
 }
+.homeImage {
+    width: 50%;
+}
+@media only screen and (max-width: 1025px) {
+    .homeImage {
+      width: 50%;
+    }
+    .homeDescription {
+        font-size: 1.5rem;
+    }
+  }

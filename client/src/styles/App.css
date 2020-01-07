@@ -1,7 +1,22 @@
 .nav-link {
   font-size: 20px;
 }
-
+/* 
 body {
   overflow: hidden;
+} */
+@media only screen and (max-width: 500px) {
+  .brandLogo {
+    height: 40px;
+  }
+}
+@media only screen and (min-width: 501px) {
+  .brandLogo {
+    height: 50px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .brandLogo {
+    height: 60px;
+  }
 }

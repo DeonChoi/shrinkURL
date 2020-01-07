@@ -28,12 +28,12 @@ const Login = (props) => {
 
     return (
         <div className='container'>
-            <h1 className='text-center display-4'>Login</h1>
+            <h1 className='text-center formTitle'>Login</h1>
             <form className='justify-content-center' onSubmit={onSubmit} >
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='email' className='form-control' placeholder='Email Address' onChange={onChangeEmail} />
                 </div>
-                <div className='form-group col-4 ml-auto mr-auto'>
+                <div className='form-group ml-auto mr-auto formInput'>
                     <input type='password' className='form-control' placeholder='Password' onChange={onChangePassword} />
                 </div>
                 <div className='form-group row justify-content-center'>

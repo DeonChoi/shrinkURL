@@ -8,6 +8,8 @@ import CreateURL from './CreateURL';
 import Register from './Register';
 import Login from './Login';
 import Logout from './Logout';
+import ResponsiveMenu from 'react-responsive-navbar';
+
 
 const App = () => {
 
@@ -23,10 +25,10 @@ const App = () => {
 
   return (
     <Router basename={'/'}>
-      <nav className='navbar navbar-default navbar-expand-lg bg-light'>
+      {/* <nav className='navbar navbar-default navbar-expand-lg bg-light'>
         <ul className='navbar-nav mr-auto'>
           <Link to={'/api/'} className='navbar-brand nav-link'>
-            <img src={brandLogo} alt='Brand Logo' height='75'/>
+            <img src={brandLogo} className='brandLogo' alt='Brand Logo' height='75'/>
           </Link>
           <Link to={'/api/urls/get'} className='navbar text-dark nav-link'>My URLs</Link>
           <Link to={'/api/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
@@ -44,6 +46,40 @@ const App = () => {
           }
           
         </ul>
+      </nav> */}
+      <nav className='navbar navbar-default navbar-expand-lg bg-light'>
+
+      <ul className='navbar-nav mr-auto float-left'>
+          <Link to={'/api/'} className='navbar-brand nav-link'>
+            <img src={brandLogo} className='brandLogo' alt='Brand Logo' height='75'/>
+          </Link>
+          
+        </ul>
+      <ResponsiveMenu
+        menuOpenButton={<div>Menu</div>}
+        menuCloseButton={<div>X</div>}
+        changeMenuOn="600px"
+       
+        menu={
+        
+        <ul className='navbar-nav'>
+          <Link to={'/api/urls/get'} className='navbar text-dark nav-link'>My URLs</Link>
+          <Link to={'/api/urls/add'} className='navbar text-dark nav-link'>Create New URL</Link>
+          { loggedIn
+          ? null
+          : <Link to={'/api/user/register'} className='navbar text-dark nav-link'>Register</Link>
+          }
+          
+          { loggedIn
+          ? <Link to={'/api/user/logout'} className='navbar text-dark nav-link' onClick={toggleLoggedIn}>Logout</Link>
+          : <Link to={'/api/user/login'} className='navbar text-dark nav-link' >Login</Link>
+          }
+          
+        </ul>
+
+        }>
+      
+      </ResponsiveMenu>
       </nav>
 
 
